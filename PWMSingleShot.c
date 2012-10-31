@@ -1,6 +1,7 @@
-#include "p30F6011A.h"
 
-void setupOCSingleShot()
+#include "PWMSingleShot.h"
+
+void SetupOutputCompareSingleShot()
 {
 	//Set tristates to outputs
 	TRISDbits.TRISD0 = 0;
@@ -35,14 +36,15 @@ void setupOCSingleShot()
 	T3CONbits.TON = 0; //Disable timer
 	T3CONbits.TSIDL = 0; //Continue operation in idle mode
 	T3CONbits.TGATE = 0; //Timer gate accumulation disabled
-	T3CONbits.TCKPS = 0b01; //Timer prescale 1:1, 1:8, 1:64, 1:256
+	T3CONbits.TCKPS = 0b00; //Timer prescale 1:1, 1:8, 1:64, 1:256
 	T3CONbits.TCS = 0; //Internal clock source
 	PR3 = 65535; //Period register	
 	TMR3=0;
+	T3CONbits.TON = 1; //Enable timer
 }
 
 //Start PWM pulses of length specified by OCxR registers
-void outputCompareFire()
+void OutputCompareFire()
 {
 	TMR3=0;
 	OC1CONbits.OCM = 0b010;
@@ -51,6 +53,66 @@ void outputCompareFire()
 	OC4CONbits.OCM = 0b010;
 	OC7CONbits.OCM = 0b010;
 	OC8CONbits.OCM = 0b010;
-	T3CONbits.TON = 1; //Enable timer
 	//The PWM outputs will now remain high until each OCxR register matches TMR3
-}	
+}
+
+void setPWM1(unsigned int value)
+{
+	OC1R = value;
+}
+
+void setPWM2(unsigned int value)
+{
+	OC2R = value;
+}
+
+void setPWM3(unsigned int value)
+{
+	OC3R = value;
+}
+
+void setPWM4(unsigned int value)
+{
+	OC4R = value;
+}
+
+void setPWM5(unsigned int value)
+{
+	OC7R = value;
+}
+
+void setPWM6(unsigned int value)
+{
+	OC8R = value;
+}
+
+unsigned int getPWM1()
+{
+	return OC1R;
+}
+
+unsigned int getPWM2()
+{
+	return OC2R;
+}
+
+unsigned int getPWM3()
+{
+	return OC3R;
+}
+
+unsigned int getPWM4()
+{
+	return OC4R;
+}
+
+unsigned int getPWM5()
+{
+	return OC7R;
+}
+
+unsigned int getPWM6()
+{
+	return OC8R;
+}
+

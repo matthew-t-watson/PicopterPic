@@ -1,4 +1,4 @@
-Microchip Technology Inc, vv3_31 (A) =
+Microchip Technology Inc, vv3_31 (A) ?
 
 Tool Name:
   c:\program files (x86)\microchip\mplab c30\bin\bin\..\bin/pic30-coff-ld.exe
@@ -22,9 +22,9 @@ Command:
   -Lc:/program files (x86)/microchip/mplab c30/bin/bin/../../support/dsPIC33F/gld \
   main.o \
   I2CSlave.o \
-  simulated_register.o \
-  PWM_single_shot.o \
   InputCapture.o \
+  PWMSingleShot.o \
+  SimulatedRegister.o \
   -Tp30F6011A.gld.00 \
   --defsym=__MPLAB_BUILD=1 \
   -Map=PicopterPic.map \
@@ -41,28 +41,73 @@ c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(crt
                               (_resetPRI)
 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(data_init_standard.o)
                               c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(crt0_standard.o) (_data_init_standard)
+c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(floatsisf.o)
+                              InputCapture.o (__floatsisf)
+c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(mulsf3.o)
+                              InputCapture.o (__mulsf3)
+c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divsf3.o)
+                              InputCapture.o (__divsf3)
+c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fixunssfsi.o)
+                              InputCapture.o (__fixunssfsi)
+c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fpack.o)
+                              c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(floatsisf.o) (_fpack)
+c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(funpack2.o)
+                              c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(mulsf3.o) (_funpack2)
+c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(futil.o)
+                              c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(mulsf3.o) (_fPropagateNaN)
+c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(funpack.o)
+                              c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fixunssfsi.o) (_funpack)
+
+
+Selected CodeGuard Options:
+  FBS:BWRP:WR_PROTECT_BOOT_OFF
+  FBS:BSS:NO_BOOT_CODE
+  FBS:EBS:NO_BOOT_EEPROM
+  FBS:RBS:NO_BOOT_RAM
+  FSS:SWRP:WR_PROT_SEC_OFF
+  FSS:SSS:NO_SEC_CODE
+  FSS:ESS:NO_SEC_EEPROM
+  FSS:RSS:NO_SEC_RAM
+  FGS:GWRP:GWRP_OFF
+  FGS:GCP:GSS_OFF
+
+CodeGuard FLASH Memory:
+  boot    (none)
+  secure  (none)
+  general 0x100 to 0x15ffc
+
+CodeGuard RAM Memory:
+  general 0x800 to 0x1fff
+  secure  (none)
+  boot    (none)
+
+CodeGuard EEPROM Memory:
+  general 0x7ff800 to 0x7fffff
+  secure  (none)
+  boot    (none)
 
 
 Program Memory  [Origin = 0x100, Length = 0x15efe]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x100                0x94            0xde  (222)
-.text                        0x194               0x44a           0x66f  (1647)
-.dinit                       0x5de                0x20            0x30  (48)
-.text                        0x5fe                 0x6             0x9  (9)
+.text                        0x100               0x2b2           0x40b  (1035)
+.const                       0x3b2                 0x4             0x6  (6)
+.text                        0x3b6               0x7a4           0xb76  (2934)
+.dinit                       0xb5a                0x26            0x39  (57)
 
-                     Total program memory used (bytes):          0x786  (1926) 1%
+                     Total program memory used (bytes):          0xfc0  (4032) 2%
 
 
 Data Memory  [Origin = 0x800, Length = 0x1800]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.ndata                       0x800                   0            0x10  (16)
-.nbss                        0x810                   0             0x2  (2)
+.nbss                        0x800                   0            0x18  (24)
+.ndata                       0x818                   0            0x10  (16)
+.nbss                        0x828                   0             0x2  (2)
 
-                        Total data memory used (bytes):           0x12  (18) <1%
+                        Total data memory used (bytes):           0x2a  (42) <1%
 
 
 Dynamic Memory Usage
@@ -70,80 +115,140 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x812                              0x17ee  (6126)
+stack                        0x82a                              0x17d6  (6102)
 
-                        Maximum dynamic memory (bytes):         0x17ee  (6126)
+                        Maximum dynamic memory (bytes):         0x17d6  (6102)
 
 
 External Symbols in Data Memory (by address):
 
-                    0x0800                  _RX1
-                    0x0802                  _RX2
-                    0x0804                  _RX3
-                    0x0806                  _RX4
-                    0x0808                  _RX5
-                    0x080a                  _RX6
-                    0x080c                  _trash
-                    0x080e                  _address
-                    0x0810                  _Flag
-                    0x0811                  _temp
+                    0x0800                  _buffer
+                    0x0818                  _RX1
+                    0x081a                  _RX2
+                    0x081c                  _RX3
+                    0x081e                  _RX4
+                    0x0820                  _RX5
+                    0x0822                  _RX6
+                    0x0824                  _trash
+                    0x0826                  _address
+                    0x0828                  _Flag
+                    0x0829                  _temp
 
 External Symbols in Data Memory (by name):
 
-                    0x0810                  _Flag
-                    0x0800                  _RX1
-                    0x0802                  _RX2
-                    0x0804                  _RX3
-                    0x0806                  _RX4
-                    0x0808                  _RX5
-                    0x080a                  _RX6
-                    0x080e                  _address
-                    0x0811                  _temp
-                    0x080c                  _trash
+                    0x0828                  _Flag
+                    0x0818                  _RX1
+                    0x081a                  _RX2
+                    0x081c                  _RX3
+                    0x081e                  _RX4
+                    0x0820                  _RX5
+                    0x0822                  _RX6
+                    0x0826                  _address
+                    0x0800                  _buffer
+                    0x0829                  _temp
+                    0x0824                  _trash
 
 External Symbols in Program Memory (by address):
 
                   0x000100                  __resetPRI
                   0x000122                  __psv_init
-                  0x000132                  __data_init_standard
                   0x000132                  __data_init
+                  0x000132                  __data_init_standard
                   0x000190                  __DefaultInterrupt
-                  0x000194                  _SetupInputCapture
-                  0x000242                  __IC1Interrupt
-                  0x000274                  __IC2Interrupt
-                  0x0002a6                  __IC3Interrupt
-                  0x0002d8                  __IC4Interrupt
-                  0x00030a                  __IC5Interrupt
-                  0x00033c                  __IC6Interrupt
-                  0x00036e                  _setupOCSingleShot
-                  0x0003fe                  _outputCompareFire
-                  0x000452                  _SetupI2C
-                  0x000462                  __SI2CInterrupt
-                  0x00051c                  _registerRead
-                  0x0005d4                  _registerWrite
-                  0x0005fe                  _main
+                  0x000194                  ___floatsisf
+                  0x0001ea                  ___mulsf3
+                  0x000252                  ___divsf3
+                  0x0002d6                  ___fixunssfsi
+                  0x00030c                  __fpack
+                  0x000358                  __funpack2
+                  0x000368                  __fPropagateNaN
+                  0x00037a                  __fbopExit
+                  0x000382                  __fbopReturnNaN
+                  0x000388                  __funpack
+                  0x0003b2                  _fosc
+                  0x0003b6                  _make16
+                  0x0003ca                  _registerRead
+                  0x000504                  _registerWrite
+                  0x000666                  _SetupInputCapture
+                  0x0007b6                  __IC1Interrupt
+                  0x0007e8                  __IC2Interrupt
+                  0x00081a                  __IC3Interrupt
+                  0x00084c                  __IC4Interrupt
+                  0x00087e                  __IC5Interrupt
+                  0x0008b0                  __IC6Interrupt
+                  0x0008e2                  __T4Interrupt
+                  0x0008f4                  _SetupOutputCompareSingleShot
+                  0x000984                  _OutputCompareFire
+                  0x0009d6                  _setPWM1
+                  0x0009e2                  _setPWM2
+                  0x0009ee                  _setPWM3
+                  0x0009fa                  _setPWM4
+                  0x000a06                  _setPWM5
+                  0x000a12                  _setPWM6
+                  0x000a1e                  _getPWM1
+                  0x000a26                  _getPWM2
+                  0x000a2e                  _getPWM3
+                  0x000a36                  _getPWM4
+                  0x000a3e                  _getPWM5
+                  0x000a46                  _getPWM6
+                  0x000a4e                  _SetupI2CSlave
+                  0x000a6e                  __SI2CInterrupt
+                  0x000b34                  _SetupModules
+                  0x000b3c                  _main
+                  0xf80006                  __FBS.sec
+                  0xf80008                  __FSS.sec
+                  0xf8000a                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x000452                  _SetupI2C
-                  0x000194                  _SetupInputCapture
+                  0x000984                  _OutputCompareFire
+                  0x000a4e                  _SetupI2CSlave
+                  0x000666                  _SetupInputCapture
+                  0x000b34                  _SetupModules
+                  0x0008f4                  _SetupOutputCompareSingleShot
                   0x000190                  __DefaultInterrupt
-                  0x000242                  __IC1Interrupt
-                  0x000274                  __IC2Interrupt
-                  0x0002a6                  __IC3Interrupt
-                  0x0002d8                  __IC4Interrupt
-                  0x00030a                  __IC5Interrupt
-                  0x00033c                  __IC6Interrupt
-                  0x000462                  __SI2CInterrupt
+                  0xf80006                  __FBS.sec
+                  0xf8000a                  __FGS.sec
+                  0xf80008                  __FSS.sec
+                  0x0007b6                  __IC1Interrupt
+                  0x0007e8                  __IC2Interrupt
+                  0x00081a                  __IC3Interrupt
+                  0x00084c                  __IC4Interrupt
+                  0x00087e                  __IC5Interrupt
+                  0x0008b0                  __IC6Interrupt
+                  0x000a6e                  __SI2CInterrupt
+                  0x0008e2                  __T4Interrupt
+                  0x000252                  ___divsf3
+                  0x0002d6                  ___fixunssfsi
+                  0x000194                  ___floatsisf
+                  0x0001ea                  ___mulsf3
                   0x000132                  __data_init
                   0x000132                  __data_init_standard
+                  0x000368                  __fPropagateNaN
+                  0x00037a                  __fbopExit
+                  0x000382                  __fbopReturnNaN
+                  0x00030c                  __fpack
+                  0x000388                  __funpack
+                  0x000358                  __funpack2
                   0x000122                  __psv_init
                   0x000100                  __resetPRI
-                  0x0005fe                  _main
-                  0x0003fe                  _outputCompareFire
-                  0x00051c                  _registerRead
-                  0x0005d4                  _registerWrite
-                  0x00036e                  _setupOCSingleShot
+                  0x0003b2                  _fosc
+                  0x000a1e                  _getPWM1
+                  0x000a26                  _getPWM2
+                  0x000a2e                  _getPWM3
+                  0x000a36                  _getPWM4
+                  0x000a3e                  _getPWM5
+                  0x000a46                  _getPWM6
+                  0x000b3c                  _main
+                  0x0003b6                  _make16
+                  0x0003ca                  _registerRead
+                  0x000504                  _registerWrite
+                  0x0009d6                  _setPWM1
+                  0x0009e2                  _setPWM2
+                  0x0009ee                  _setPWM3
+                  0x0009fa                  _setPWM4
+                  0x000a06                  _setPWM5
+                  0x000a12                  _setPWM6
 
 Memory Configuration
 
@@ -172,9 +277,9 @@ Linker script and memory map
 
 LOAD main.o
 LOAD I2CSlave.o
-LOAD simulated_register.o
-LOAD PWM_single_shot.o
 LOAD InputCapture.o
+LOAD PWMSingleShot.o
+LOAD SimulatedRegister.o
 LOAD c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F6011A-coff.a
                     0x8005c0                  __FUID0 = 0x8005c0
                     0x8005c2                  __FUID1 = 0x8005c2
@@ -201,7 +306,7 @@ LOAD c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp3
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000100         0x94
+.text             0x000100        0x2b2
  *(.init)
  .init            0x000100         0x32 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(crt0_standard.o)
                   0x000100                  _resetPRI
@@ -217,6 +322,24 @@ LOAD c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp3
                   0x000190                  _DefaultInterrupt
  *(.libc)
  *(.libm)
+ .libm            0x000194         0x56 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(floatsisf.o)
+                  0x000194                  __floatsisf
+ .libm            0x0001ea         0x68 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(mulsf3.o)
+                  0x0001ea                  __mulsf3
+ .libm            0x000252         0x84 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divsf3.o)
+                  0x000252                  __divsf3
+ .libm            0x0002d6         0x36 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fixunssfsi.o)
+                  0x0002d6                  __fixunssfsi
+ .libm            0x00030c         0x4c c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fpack.o)
+                  0x00030c                  _fpack
+ .libm            0x000358         0x10 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(funpack2.o)
+                  0x000358                  _funpack2
+ .libm            0x000368         0x20 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(futil.o)
+                  0x000368                  _fPropagateNaN
+                  0x00037a                  _fbopExit
+                  0x000382                  _fbopReturnNaN
+ .libm            0x000388         0x2a c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(funpack.o)
+                  0x000388                  _funpack
  *(.libdsp)
  *(.lib*)
 
@@ -235,26 +358,36 @@ __FUID2
 __FUID3
  *(__FUID3.sec*)
 
-__FOSC
+__FOSC            0xf80000          0x2
  *(__FOSC.sec*)
+ __FOSC.sec       0xf80000          0x2 main.o
 
-__FWDT
+__FWDT            0xf80002          0x2
  *(__FWDT.sec*)
+ __FWDT.sec       0xf80002          0x2 main.o
 
-__FBORPOR
+__FBORPOR         0xf80004          0x2
  *(__FBORPOR.sec*)
+ __FBORPOR.sec    0xf80004          0x2 main.o
 
-__FBS
+__FBS             0xf80006          0x2
  *(__FBS.sec*)
+ __FBS.sec        0xf80006          0x2 FBS
+                  0xf80006                  _FBS.sec
 
-__FSS
+__FSS             0xf80008          0x2
  *(__FSS.sec*)
+ __FSS.sec        0xf80008          0x2 FSS
+                  0xf80008                  _FSS.sec
 
-__FGS
+__FGS             0xf8000a          0x2
  *(__FGS.sec*)
+ __FGS.sec        0xf8000a          0x2 FGS
+                  0xf8000a                  _FGS.sec
 
-__FICD
+__FICD            0xf8000c          0x2
  *(__FICD.sec*)
+ __FICD.sec       0xf8000c          0x2 main.o
 
 user_eedata
  *(user_eedata)
@@ -306,10 +439,10 @@ userdata
                   0x000010          0x4 LONG 0x190 DEFINED (__ReservedTrap6)?ABSOLUTE (__ReservedTrap6):ABSOLUTE (__DefaultInterrupt)
                   0x000012          0x4 LONG 0x190 DEFINED (__ReservedTrap7)?ABSOLUTE (__ReservedTrap7):ABSOLUTE (__DefaultInterrupt)
                   0x000014          0x4 LONG 0x190 DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000016          0x4 LONG 0x242 DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000016          0x4 LONG 0x7b6 DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000018          0x4 LONG 0x190 DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001a          0x4 LONG 0x190 DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00001c          0x4 LONG 0x274 DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00001c          0x4 LONG 0x7e8 DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001e          0x4 LONG 0x190 DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000020          0x4 LONG 0x190 DEFINED (__T2Interrupt)?ABSOLUTE (__T2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000022          0x4 LONG 0x190 DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -318,7 +451,7 @@ userdata
                   0x000028          0x4 LONG 0x190 DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00002a          0x4 LONG 0x190 DEFINED (__ADCInterrupt)?ABSOLUTE (__ADCInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00002c          0x4 LONG 0x190 DEFINED (__NVMInterrupt)?ABSOLUTE (__NVMInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00002e          0x4 LONG 0x462 DEFINED (__SI2CInterrupt)?ABSOLUTE (__SI2CInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00002e          0x4 LONG 0xa6e DEFINED (__SI2CInterrupt)?ABSOLUTE (__SI2CInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000030          0x4 LONG 0x190 DEFINED (__MI2CInterrupt)?ABSOLUTE (__MI2CInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000032          0x4 LONG 0x190 DEFINED (__CNInterrupt)?ABSOLUTE (__CNInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000034          0x4 LONG 0x190 DEFINED (__INT1Interrupt)?ABSOLUTE (__INT1Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -326,17 +459,17 @@ userdata
                   0x000038          0x4 LONG 0x190 DEFINED (__IC8Interrupt)?ABSOLUTE (__IC8Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00003a          0x4 LONG 0x190 DEFINED (__OC3Interrupt)?ABSOLUTE (__OC3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00003c          0x4 LONG 0x190 DEFINED (__OC4Interrupt)?ABSOLUTE (__OC4Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00003e          0x4 LONG 0x190 DEFINED (__T4Interrupt)?ABSOLUTE (__T4Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00003e          0x4 LONG 0x8e2 DEFINED (__T4Interrupt)?ABSOLUTE (__T4Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000040          0x4 LONG 0x190 DEFINED (__T5Interrupt)?ABSOLUTE (__T5Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000042          0x4 LONG 0x190 DEFINED (__INT2Interrupt)?ABSOLUTE (__INT2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000044          0x4 LONG 0x190 DEFINED (__U2RXInterrupt)?ABSOLUTE (__U2RXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000046          0x4 LONG 0x190 DEFINED (__U2TXInterrupt)?ABSOLUTE (__U2TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000048          0x4 LONG 0x190 DEFINED (__SPI2Interrupt)?ABSOLUTE (__SPI2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00004a          0x4 LONG 0x190 DEFINED (__C1Interrupt)?ABSOLUTE (__C1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00004c          0x4 LONG 0x2a6 DEFINED (__IC3Interrupt)?ABSOLUTE (__IC3Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00004e          0x4 LONG 0x2d8 DEFINED (__IC4Interrupt)?ABSOLUTE (__IC4Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000050          0x4 LONG 0x30a DEFINED (__IC5Interrupt)?ABSOLUTE (__IC5Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000052          0x4 LONG 0x33c DEFINED (__IC6Interrupt)?ABSOLUTE (__IC6Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00004c          0x4 LONG 0x81a DEFINED (__IC3Interrupt)?ABSOLUTE (__IC3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00004e          0x4 LONG 0x84c DEFINED (__IC4Interrupt)?ABSOLUTE (__IC4Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000050          0x4 LONG 0x87e DEFINED (__IC5Interrupt)?ABSOLUTE (__IC5Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000052          0x4 LONG 0x8b0 DEFINED (__IC6Interrupt)?ABSOLUTE (__IC6Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000054          0x4 LONG 0x190 DEFINED (__OC5Interrupt)?ABSOLUTE (__OC5Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000056          0x4 LONG 0x190 DEFINED (__OC6Interrupt)?ABSOLUTE (__OC6Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000058          0x4 LONG 0x190 DEFINED (__OC7Interrupt)?ABSOLUTE (__OC7Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -370,10 +503,10 @@ userdata
                   0x000090          0x4 LONG 0x190 DEFINED (__AltReservedTrap6)?ABSOLUTE (__AltReservedTrap6):DEFINED (__ReservedTrap6)?ABSOLUTE (__ReservedTrap6):ABSOLUTE (__DefaultInterrupt)
                   0x000092          0x4 LONG 0x190 DEFINED (__AltReservedTrap7)?ABSOLUTE (__AltReservedTrap7):DEFINED (__ReservedTrap7)?ABSOLUTE (__ReservedTrap7):ABSOLUTE (__DefaultInterrupt)
                   0x000094          0x4 LONG 0x190 DEFINED (__AltINT0Interrupt)?ABSOLUTE (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000096          0x4 LONG 0x242 DEFINED (__AltIC1Interrupt)?ABSOLUTE (__AltIC1Interrupt):DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000096          0x4 LONG 0x7b6 DEFINED (__AltIC1Interrupt)?ABSOLUTE (__AltIC1Interrupt):DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000098          0x4 LONG 0x190 DEFINED (__AltOC1Interrupt)?ABSOLUTE (__AltOC1Interrupt):DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00009a          0x4 LONG 0x190 DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00009c          0x4 LONG 0x274 DEFINED (__AltIC2Interrupt)?ABSOLUTE (__AltIC2Interrupt):DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00009c          0x4 LONG 0x7e8 DEFINED (__AltIC2Interrupt)?ABSOLUTE (__AltIC2Interrupt):DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00009e          0x4 LONG 0x190 DEFINED (__AltOC2Interrupt)?ABSOLUTE (__AltOC2Interrupt):DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000a0          0x4 LONG 0x190 DEFINED (__AltT2Interrupt)?ABSOLUTE (__AltT2Interrupt):DEFINED (__T2Interrupt)?ABSOLUTE (__T2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000a2          0x4 LONG 0x190 DEFINED (__AltT3Interrupt)?ABSOLUTE (__AltT3Interrupt):DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -382,7 +515,7 @@ userdata
                   0x0000a8          0x4 LONG 0x190 DEFINED (__AltU1TXInterrupt)?ABSOLUTE (__AltU1TXInterrupt):DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000aa          0x4 LONG 0x190 DEFINED (__AltADCInterrupt)?ABSOLUTE (__AltADCInterrupt):DEFINED (__ADCInterrupt)?ABSOLUTE (__ADCInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000ac          0x4 LONG 0x190 DEFINED (__AltNVMInterrupt)?ABSOLUTE (__AltNVMInterrupt):DEFINED (__NVMInterrupt)?ABSOLUTE (__NVMInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000ae          0x4 LONG 0x462 DEFINED (__AltSI2CInterrupt)?ABSOLUTE (__AltSI2CInterrupt):DEFINED (__SI2CInterrupt)?ABSOLUTE (__SI2CInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000ae          0x4 LONG 0xa6e DEFINED (__AltSI2CInterrupt)?ABSOLUTE (__AltSI2CInterrupt):DEFINED (__SI2CInterrupt)?ABSOLUTE (__SI2CInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000b0          0x4 LONG 0x190 DEFINED (__AltMI2CInterrupt)?ABSOLUTE (__AltMI2CInterrupt):DEFINED (__MI2CInterrupt)?ABSOLUTE (__MI2CInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000b2          0x4 LONG 0x190 DEFINED (__AltCNInterrupt)?ABSOLUTE (__AltCNInterrupt):DEFINED (__CNInterrupt)?ABSOLUTE (__CNInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000b4          0x4 LONG 0x190 DEFINED (__AltINT1Interrupt)?ABSOLUTE (__AltINT1Interrupt):DEFINED (__INT1Interrupt)?ABSOLUTE (__INT1Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -390,17 +523,17 @@ userdata
                   0x0000b8          0x4 LONG 0x190 DEFINED (__AltIC8Interrupt)?ABSOLUTE (__AltIC8Interrupt):DEFINED (__IC8Interrupt)?ABSOLUTE (__IC8Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000ba          0x4 LONG 0x190 DEFINED (__AltOC3Interrupt)?ABSOLUTE (__AltOC3Interrupt):DEFINED (__OC3Interrupt)?ABSOLUTE (__OC3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000bc          0x4 LONG 0x190 DEFINED (__AltOC4Interrupt)?ABSOLUTE (__AltOC4Interrupt):DEFINED (__OC4Interrupt)?ABSOLUTE (__OC4Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000be          0x4 LONG 0x190 DEFINED (__AltT4Interrupt)?ABSOLUTE (__AltT4Interrupt):DEFINED (__T4Interrupt)?ABSOLUTE (__T4Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000be          0x4 LONG 0x8e2 DEFINED (__AltT4Interrupt)?ABSOLUTE (__AltT4Interrupt):DEFINED (__T4Interrupt)?ABSOLUTE (__T4Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000c0          0x4 LONG 0x190 DEFINED (__AltT5Interrupt)?ABSOLUTE (__AltT5Interrupt):DEFINED (__T5Interrupt)?ABSOLUTE (__T5Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000c2          0x4 LONG 0x190 DEFINED (__AltINT2Interrupt)?ABSOLUTE (__AltINT2Interrupt):DEFINED (__INT2Interrupt)?ABSOLUTE (__INT2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000c4          0x4 LONG 0x190 DEFINED (__AltU2RXInterrupt)?ABSOLUTE (__AltU2RXInterrupt):DEFINED (__U2RXInterrupt)?ABSOLUTE (__U2RXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000c6          0x4 LONG 0x190 DEFINED (__AltU2TXInterrupt)?ABSOLUTE (__AltU2TXInterrupt):DEFINED (__U2TXInterrupt)?ABSOLUTE (__U2TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000c8          0x4 LONG 0x190 DEFINED (__AltSPI2Interrupt)?ABSOLUTE (__AltSPI2Interrupt):DEFINED (__SPI2Interrupt)?ABSOLUTE (__SPI2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000ca          0x4 LONG 0x190 DEFINED (__AltC1Interrupt)?ABSOLUTE (__AltC1Interrupt):DEFINED (__C1Interrupt)?ABSOLUTE (__C1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000cc          0x4 LONG 0x2a6 DEFINED (__AltIC3Interrupt)?ABSOLUTE (__AltIC3Interrupt):DEFINED (__IC3Interrupt)?ABSOLUTE (__IC3Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000ce          0x4 LONG 0x2d8 DEFINED (__AltIC4Interrupt)?ABSOLUTE (__AltIC4Interrupt):DEFINED (__IC4Interrupt)?ABSOLUTE (__IC4Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000d0          0x4 LONG 0x30a DEFINED (__AltIC5Interrupt)?ABSOLUTE (__AltIC5Interrupt):DEFINED (__IC5Interrupt)?ABSOLUTE (__IC5Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000d2          0x4 LONG 0x33c DEFINED (__AltIC6Interrupt)?ABSOLUTE (__AltIC6Interrupt):DEFINED (__IC6Interrupt)?ABSOLUTE (__IC6Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000cc          0x4 LONG 0x81a DEFINED (__AltIC3Interrupt)?ABSOLUTE (__AltIC3Interrupt):DEFINED (__IC3Interrupt)?ABSOLUTE (__IC3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000ce          0x4 LONG 0x84c DEFINED (__AltIC4Interrupt)?ABSOLUTE (__AltIC4Interrupt):DEFINED (__IC4Interrupt)?ABSOLUTE (__IC4Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000d0          0x4 LONG 0x87e DEFINED (__AltIC5Interrupt)?ABSOLUTE (__AltIC5Interrupt):DEFINED (__IC5Interrupt)?ABSOLUTE (__IC5Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000d2          0x4 LONG 0x8b0 DEFINED (__AltIC6Interrupt)?ABSOLUTE (__AltIC6Interrupt):DEFINED (__IC6Interrupt)?ABSOLUTE (__IC6Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000d4          0x4 LONG 0x190 DEFINED (__AltOC5Interrupt)?ABSOLUTE (__AltOC5Interrupt):DEFINED (__OC5Interrupt)?ABSOLUTE (__OC5Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000d6          0x4 LONG 0x190 DEFINED (__AltOC6Interrupt)?ABSOLUTE (__AltOC6Interrupt):DEFINED (__OC6Interrupt)?ABSOLUTE (__OC6Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000d8          0x4 LONG 0x190 DEFINED (__AltOC7Interrupt)?ABSOLUTE (__AltOC7Interrupt):DEFINED (__OC7Interrupt)?ABSOLUTE (__OC7Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -1394,65 +1527,105 @@ LOAD c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a
 LOAD c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libc-coff.a
 END GROUP
 OUTPUT(PicopterPic.cof coff-pic30)
+LOAD FBS
+LOAD FSS
+LOAD FGS
 LOAD data_init
 LOAD default_isr
 
 __c30_signature
-                  0x000000         0x2a
+                  0x000000         0x5a
  __c30_signature
                   0x000000          0x6 main.o
  __c30_signature
                   0x000006          0x6 I2CSlave.o
  __c30_signature
-                  0x00000c          0x6 simulated_register.o
+                  0x00000c          0x6 InputCapture.o
  __c30_signature
-                  0x000012          0x6 PWM_single_shot.o
+                  0x000012          0x6 PWMSingleShot.o
  __c30_signature
-                  0x000018          0x6 InputCapture.o
+                  0x000018          0x6 SimulatedRegister.o
  __c30_signature
                   0x00001e          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(crt0_standard.o)
  __c30_signature
                   0x000024          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(data_init_standard.o)
+ __c30_signature
+                  0x00002a          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(floatsisf.o)
+ __c30_signature
+                  0x000030          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(mulsf3.o)
+ __c30_signature
+                  0x000036          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divsf3.o)
+ __c30_signature
+                  0x00003c          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fixunssfsi.o)
+ __c30_signature
+                  0x000042          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fpack.o)
+ __c30_signature
+                  0x000048          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(funpack2.o)
+ __c30_signature
+                  0x00004e          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(futil.o)
+ __c30_signature
+                  0x000054          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(funpack.o)
 
-.ndata              0x0800         0x10
- .ndata             0x0800          0xe InputCapture.o
-                    0x0800                  RX1
-                    0x0802                  RX2
-                    0x0804                  RX3
-                    0x0806                  RX4
-                    0x0808                  RX5
-                    0x080a                  RX6
-                    0x080c                  trash
- .ndata             0x080e          0x2 I2CSlave.o
-                    0x080e                  address
+.nbss               0x0800         0x18
+ .nbss              0x0800         0x18 SimulatedRegister.o
+                    0x0800                  buffer
 
-.nbss               0x0810          0x2
- .nbss              0x0810          0x2 I2CSlave.o
-                    0x0810                  Flag
-                    0x0811                  temp
+.ndata              0x0818         0x10
+ .ndata             0x0818          0xe InputCapture.o
+                    0x0818                  RX1
+                    0x081a                  RX2
+                    0x081c                  RX3
+                    0x081e                  RX4
+                    0x0820                  RX5
+                    0x0822                  RX6
+                    0x0824                  trash
+ .ndata             0x0826          0x2 I2CSlave.o
+                    0x0826                  address
 
-.text             0x000194        0x44a
- .text            0x000194        0x1da InputCapture.o
-                  0x000194                  SetupInputCapture
-                  0x000242                  _IC1Interrupt
-                  0x000274                  _IC2Interrupt
-                  0x0002a6                  _IC3Interrupt
-                  0x0002d8                  _IC4Interrupt
-                  0x00030a                  _IC5Interrupt
-                  0x00033c                  _IC6Interrupt
- .text            0x00036e         0xe4 PWM_single_shot.o
-                  0x00036e                  setupOCSingleShot
-                  0x0003fe                  outputCompareFire
- .text            0x000452         0xca I2CSlave.o
-                  0x000452                  SetupI2C
-                  0x000462                  _SI2CInterrupt
- .text            0x00051c         0xc2 simulated_register.o
-                  0x00051c                  registerRead
-                  0x0005d4                  registerWrite
+.nbss               0x0828          0x2
+ .nbss              0x0828          0x2 I2CSlave.o
+                    0x0828                  Flag
+                    0x0829                  temp
 
-.dinit            0x0005de         0x20
- .dinit           0x0005de         0x20 data_init
+.const              0x83b2          0x4 load address 0x0003b2  
+ .const             0x83b2          0x4 main.o
+                    0x83b2                  fosc
 
-.text             0x0005fe          0x6
- .text            0x0005fe          0x6 main.o
-                  0x0005fe                  main
+.text             0x0003b6        0x7a4
+ .text            0x0003b6        0x2b0 SimulatedRegister.o
+                  0x0003b6                  make16
+                  0x0003ca                  registerRead
+                  0x000504                  registerWrite
+ .text            0x000666        0x28e InputCapture.o
+                  0x000666                  SetupInputCapture
+                  0x0007b6                  _IC1Interrupt
+                  0x0007e8                  _IC2Interrupt
+                  0x00081a                  _IC3Interrupt
+                  0x00084c                  _IC4Interrupt
+                  0x00087e                  _IC5Interrupt
+                  0x0008b0                  _IC6Interrupt
+                  0x0008e2                  _T4Interrupt
+ .text            0x0008f4        0x15a PWMSingleShot.o
+                  0x0008f4                  SetupOutputCompareSingleShot
+                  0x000984                  OutputCompareFire
+                  0x0009d6                  setPWM1
+                  0x0009e2                  setPWM2
+                  0x0009ee                  setPWM3
+                  0x0009fa                  setPWM4
+                  0x000a06                  setPWM5
+                  0x000a12                  setPWM6
+                  0x000a1e                  getPWM1
+                  0x000a26                  getPWM2
+                  0x000a2e                  getPWM3
+                  0x000a36                  getPWM4
+                  0x000a3e                  getPWM5
+                  0x000a46                  getPWM6
+ .text            0x000a4e         0xe6 I2CSlave.o
+                  0x000a4e                  SetupI2CSlave
+                  0x000a6e                  _SI2CInterrupt
+ .text            0x000b34         0x26 main.o
+                  0x000b34                  SetupModules
+                  0x000b3c                  main
+
+.dinit            0x000b5a         0x26
+ .dinit           0x000b5a         0x26 data_init
